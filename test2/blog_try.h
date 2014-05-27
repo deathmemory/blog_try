@@ -1,7 +1,7 @@
 #pragma once
 #include "StdAfx.h"
 //#include "resource.h"
-
+#include "MKMgr.h"
 #include "IrregularWindow.h"
 
 class CMainFrame :
@@ -13,6 +13,7 @@ public:
 public:
 	UINT const GetClassStyle();
 	LPCTSTR GetWindowClassName() const;
+
 	void OnPrepare();
 	void Notify(TNotifyUI& msg);
 	LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -20,6 +21,7 @@ public:
 public:
 	CPaintManagerUI m_pm;//与控件绘制和消息处理关联起来
 	CIrregularWindow *m_pBackWnd;
+	CMKMgr	m_MKMgr;
 };
 
 

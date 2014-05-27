@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<Window size="239,212" sizebox="4,4,6,6" caption="0,0,0,30" linkfontcolor="0xFF0000FF">
+<Window size="366,399" sizebox="4,4,6,6" caption="0,0,0,30" linkfontcolor="0xFF0000FF">
     <VerticalLayout name="VerticalLayoutUI1" pos="0,0,287,258" width="287" height="258" bkcolor="#FFFF00FF" >
 		<Control height="4" />
-			<Text name="startmkcn" text="&lt;a&gt;■start_mkcn&lt;/a&gt;" tooltip="the tool tip" pos="50,50,0,0" width="100" height="16" showhtml="true" float="true" align="left" textpadding="2,0,2,0" />
-			<Text name="startmkcn" text="&lt;a&gt;■start_mkcn&lt;/a&gt;" tooltip="the tool tip" pos="50,100,0,0" width="100" height="16" showhtml="true" float="true" align="left" textpadding="2,0,2,0" />
-			<Text name="startmkcn" text="&lt;a&gt;■start_mkcn&lt;/a&gt;" tooltip="the tool tip" pos="150,50,0,0" width="100" height="16" showhtml="true" float="true" align="left" textpadding="2,0,2,0" />
-			<Text name="startmkcn" text="&lt;a&gt;■start_mkcn&lt;/a&gt;" tooltip="the tool tip" pos="150,100,0,0" width="100" height="16" showhtml="true" float="true" align="left" textpadding="2,0,2,0" />
+			<Button name="close" text="X" pos="340,165,0,0" width="10" height="16" float="true" bkcolor="#ffff0000" />
+			<Label name="version" text="ver:1.0.0.1" pos="188,214,0,0" width="100" height="16" float="true" />
+			<Label name="author" text="<b>制作By:正式魔法师<b>" pos="65,240,0,0" width="150" height="16" float="true" showhtml="true" />
+			<Text name="startmkcn" text="&lt;a&gt;■运行MKcn&lt;/a&gt;" tooltip="the tool tip" pos="98,280,0,0" width="100" height="16" showhtml="true" float="true" align="left" textpadding="2,0,2,0" />
+			<Text name="update" text="&lt;a&gt;■放心更新&lt;/a&gt;" tooltip="the tool tip" pos="98,325,0,0" width="100" height="16" showhtml="true" float="true" align="left" textpadding="2,0,2,0" />
+			<Text name="thankslist" text="&lt;a&gt;■感谢名单&lt;/a&gt;" tooltip="the tool tip" pos="198,280,0,0" width="100" height="16" showhtml="true" float="true" align="left" textpadding="2,0,2,0" />
+			<Text name="aboutme" text="&lt;a&gt;■反馈作者&lt;/a&gt;" tooltip="the tool tip" pos="198,325,0,0" width="100" height="16" showhtml="true" float="true" align="left" textpadding="2,0,2,0" />
 		<Control height="4" />
 	</VerticalLayout>
 </Window>

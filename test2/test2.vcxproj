@@ -109,12 +109,21 @@
   <ItemGroup>
     <ClInclude Include="blog_try.h" />
     <ClInclude Include="IrregularWindow.h" />
+    <ClInclude Include="MKMgr.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="blog_try.cpp" />
     <ClCompile Include="IrregularWindow.cpp" />
+    <ClCompile Include="MKMgr.cpp" />
     <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\blog_try\res\LauncherTransit.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

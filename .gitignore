@@ -7,6 +7,7 @@
 .metadata
 bin/
 tmp/
+*.dll
 *.tmp
 *.bak
 *.swp
@@ -43,6 +44,7 @@ local.properties
 
 # Build results
 
+[Uu]nicodeDebug/
 [Dd]ebug/
 [Rr]elease/
 x64/

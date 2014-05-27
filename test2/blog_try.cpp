@@ -27,14 +27,29 @@ LPCTSTR CMainFrame::GetWindowClassName() const //ÖØÐ´»ñÈ¡ÀàÃûº¯Êý£¬Ò²¾ÍÊÇÖ¸¶¨ÒªÐ
 { 
 	return _T("UIMainFrame"); 
 };
+
 UINT const CMainFrame::GetClassStyle()  //ÖØÐ´Õâ¸öº¯Êý£¬À´Ö¸¶¨´°¿ÚÑùÊ½
 { 
 	return UI_CLASSSTYLE_FRAME | CS_DBLCLKS; 
 };
+
 void CMainFrame::Notify(TNotifyUI& msg)//´¦Àí´°¿ÚÍ¨ÖªÏûÏ¢£¬ÏìÓ¦ÓÃ»§µÄÊäÈë
 {
+	CDuiString name = msg.pSender->GetName();
 	if (msg.sType == _T("link")){
-		MessageBox(0, msg.pSender->GetName() + _T("link name"), 0, 0);
+		if (name == _T("startmkcn")){
+			m_MKMgr.patchAndRunMK();
+		}else if (name == _T("update")){
+			m_MKMgr.doUpdate();
+		}else if (name == _T("thankslist")){
+			m_MKMgr.thanksList();
+		}else if (name == _T("aboutme")){
+			m_MKMgr.aboutMe();
+		}
+	}else if (msg.sType == _T("click")){
+		if (name == _T("close")){
+			SendMessage(WM_DESTROY);
+		}
 	}
 }
 LRESULT CMainFrame::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled){
