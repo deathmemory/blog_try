@@ -123,7 +123,9 @@
     <ResourceCompile Include="resources.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\blog_try\res\LauncherTransit.dll" />
+    <None Include="res\bg.png" />
+    <None Include="res\LauncherTransit.dat" />
+    <None Include="res\UISkin.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

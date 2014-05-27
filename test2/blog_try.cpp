@@ -2,8 +2,8 @@
 //
 
 #include "stdafx.h"
+#include "resource.h"
 #include "blog_try.h"
-
 
 CMainFrame::CMainFrame(void)
 {
@@ -55,8 +55,11 @@ void CMainFrame::Notify(TNotifyUI& msg)//处理窗口通知消息，响应用户的输入
 LRESULT CMainFrame::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled){
 	m_pm.Init(m_hWnd);//主窗口类与窗口句柄关联
 	CDialogBuilder builder;
-
+#ifdef _DEBUG
 	CControlUI* pRoot = builder.Create(_T("UISkin.xml"), (UINT)0, NULL, &m_pm);//加载XML并动态创建界面无素，与布局界面元素，核心函数单独分析
+#else
+	CControlUI* pRoot = builder.Create((STRINGorID)MAKEINTRESOURCE(IDR_SKIN_XML), _T("DATA"), NULL, &m_pm);//加载XML并动态创建界面无素，与布局界面元素，核心函数单独分析
+#endif
 	//注意：CDialogBuilder 并不是一个对话框类
 	ASSERT(pRoot && "Failed to parse XML");
 	if (NULL==pRoot)//如果找不到皮肤文件则退出
@@ -106,8 +109,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
                      int       nCmdShow)
 {
 	CPaintManagerUI::SetInstance(hInstance);//设置程序实例
-	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath() 
-		+ _T("skin"));//实例句柄与渲染类关联,获得皮肤文件目录（加载皮肤文件在OnCreate之中）
+	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath() + _T("skin"));//实例句柄与渲染类关联,获得皮肤文件目录（加载皮肤文件在OnCreate之中）
 
 	HRESULT Hr = ::CoInitialize(NULL);//初始化COM库, 为加载COM库提供支持
 	if( FAILED(Hr) ) 

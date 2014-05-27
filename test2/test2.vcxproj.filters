@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\res">
+      <UniqueIdentifier>{4fdab282-0a15-400f-a64f-e575b4f07c53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -51,6 +54,14 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\blog_try\res\LauncherTransit.dll" />
+    <None Include="res\bg.png">
+      <Filter>Resource Files\res</Filter>
+    </None>
+    <None Include="res\UISkin.xml">
+      <Filter>Resource Files\res</Filter>
+    </None>
+    <None Include="res\LauncherTransit.dat">
+      <Filter>Resource Files\res</Filter>
+    </None>
   </ItemGroup>
 </Project>
