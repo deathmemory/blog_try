@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="239,212" sizebox="4,4,6,6" caption="0,0,0,30" linkfontcolor="0xFF0000FF">
+    <VerticalLayout name="VerticalLayoutUI1" pos="0,0,287,258" width="287" height="258" bkcolor="#FFFF00FF" >
+		<Control height="4" />
+			<Text name="startmkcn" text="&lt;a&gt;■start_mkcn&lt;/a&gt;" tooltip="the tool tip" pos="50,50,0,0" width="100" height="16" showhtml="true" float="true" align="left" textpadding="2,0,2,0" />
+			<Text name="startmkcn" text="&lt;a&gt;■start_mkcn&lt;/a&gt;" tooltip="the tool tip" pos="50,100,0,0" width="100" height="16" showhtml="true" float="true" align="left" textpadding="2,0,2,0" />
+			<Text name="startmkcn" text="&lt;a&gt;■start_mkcn&lt;/a&gt;" tooltip="the tool tip" pos="150,50,0,0" width="100" height="16" showhtml="true" float="true" align="left" textpadding="2,0,2,0" />
+			<Text name="startmkcn" text="&lt;a&gt;■start_mkcn&lt;/a&gt;" tooltip="the tool tip" pos="150,100,0,0" width="100" height="16" showhtml="true" float="true" align="left" textpadding="2,0,2,0" />
+		<Control height="4" />
+	</VerticalLayout>
+</Window>
