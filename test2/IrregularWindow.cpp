@@ -13,14 +13,19 @@ ULONG_PTR CIrregularWindow::gdiplusToken = 0;
 
 HHOOK CIrregularWindow::hhk = NULL;
 
-CIrregularWindow::CIrregularWindow(const TCHAR* pBackImgFullPath,DWORD dwAttachWndTransColor)
+CIrregularWindow::CIrregularWindow(const TCHAR* pBackImgFullPath, TCHAR* sourceType, DWORD dwAttachWndTransColor)
 :m_hWnd(NULL)
 ,m_hAttachWnd(NULL)
+,m_dwResID(0)
+,m_sourceType(sourceType)
 ,m_dwAttachWndTransColor(dwAttachWndTransColor)
 {
-	if(pBackImgFullPath != NULL)
-	{
-		m_strBackImg = pBackImgFullPath;
+	if(pBackImgFullPath != NULL){
+		if (sourceType){
+			m_dwResID = (DWORD)pBackImgFullPath;
+		}else{
+			m_strBackImg = pBackImgFullPath;
+		}
 
 		if(!RegisterWindowClass() || !Create())
 		{
@@ -97,6 +102,48 @@ bool CIrregularWindow::AttachWindow(HWND hWnd)
 	return true;
 }
 
+Image* CIrregularWindow::GetImage(){
+	Gdiplus::Image* pImage = NULL;
+	if (NULL == m_sourceType){
+#ifdef UNICODE
+		pImage = Gdiplus::Image::FromFile(m_strBackImg.c_str());
+#else
+		size_t szHasConv = 0;
+		DWORD dwSize = m_strBackImg.size() + 1;
+		wchar_t* pImgPath = new wchar_t[dwSize];
+		memset((void*)pImgPath,0,sizeof(wchar_t) * dwSize);
+		::mbstowcs_s(&szHasConv,pImgPath,dwSize,m_strBackImg.c_str(),m_strBackImg.size());
+		pImage = Gdiplus::Image::FromFile(pImgPath);
+		delete [] pImgPath;	
+#endif
+	}else{
+		HRSRC hResource = ::FindResource(CPaintManagerUI::GetResourceDll(), MAKEINTRESOURCE(m_dwResID), m_sourceType);
+		if( hResource == NULL ) return NULL;
+		HGLOBAL hGlobal = ::LoadResource(CPaintManagerUI::GetResourceDll(), hResource);
+		if( hGlobal == NULL ) {
+			FreeResource(hResource);
+			return FALSE;
+		}
+		LPVOID resBuffer = ::LockResource(hGlobal);
+		DWORD sourceSize = ::SizeofResource(CPaintManagerUI::GetResourceDll(), hResource);
+		HGLOBAL hBuffer = ::GlobalAlloc(GMEM_FIXED, sourceSize);
+		if (NULL == hBuffer)
+			return NULL;
+		void* pBuffer = ::GlobalLock(hBuffer);
+		if (pBuffer){
+			CopyMemory(pBuffer, resBuffer, sourceSize);
+			IStream* pStmBmp = NULL;
+			if ( CreateStreamOnHGlobal(hBuffer, FALSE, &pStmBmp) == S_OK ){
+				pImage = Gdiplus::Image::FromStream(pStmBmp);
+				pStmBmp->Release();
+			}			
+			::GlobalUnlock(hBuffer);
+		}		
+		::FreeResource(hResource);
+	}	
+	return pImage;
+}
+
 void CIrregularWindow::SetBackground(const TCHAR* pBackImgFullPath)
 {
 	if(pBackImgFullPath != NULL)
@@ -104,115 +151,102 @@ void CIrregularWindow::SetBackground(const TCHAR* pBackImgFullPath)
 		m_strBackImg = pBackImgFullPath;
 	}
 
-	if(!m_strBackImg.empty())
+	Gdiplus::Image* pImage = this->GetImage();
+
+	if(pImage)
 	{
-#ifdef UNICODE
-		Gdiplus::Image* pImage = Gdiplus::Image::FromFile(pBackImgFullPath);
-#else
-		size_t szHasConv = 0;
-		DWORD dwSize = m_strBackImg.size() + 1;
-		wchar_t* pImgPath = new wchar_t[dwSize];
-		memset((void*)pImgPath,0,sizeof(wchar_t) * dwSize);
-		::mbstowcs_s(&szHasConv,pImgPath,dwSize,m_strBackImg.c_str(),m_strBackImg.size());
-		Gdiplus::Image* pImage = Gdiplus::Image::FromFile(pImgPath);
-		delete [] pImgPath;	
-#endif
+		BLENDFUNCTION blendFunc;
+		blendFunc.BlendOp = 0;
+		blendFunc.BlendFlags = 0;
+		blendFunc.AlphaFormat = 1;
+		blendFunc.SourceConstantAlpha = 255;//AC_SRC_ALPHA
 
-		if(pImage)
-		{
-			BLENDFUNCTION blendFunc;
-			blendFunc.BlendOp = 0;
-			blendFunc.BlendFlags = 0;
-			blendFunc.AlphaFormat = 1;
-			blendFunc.SourceConstantAlpha = 255;//AC_SRC_ALPHA
+		SIZE sizeWindow = { pImage->GetWidth(), pImage->GetHeight()};
 
-			SIZE sizeWindow = { pImage->GetWidth(), pImage->GetHeight()};
+		HDC hDC = ::GetDC(m_hWnd);
 
-			HDC hDC = ::GetDC(m_hWnd);
+		HDC hdcMemory = CreateCompatibleDC(hDC);
 
-			HDC hdcMemory = CreateCompatibleDC(hDC);
+		HBITMAP hBitMap = CreateCompatibleBitmap(hDC, sizeWindow.cx, sizeWindow.cy);
 
-			HBITMAP hBitMap = CreateCompatibleBitmap(hDC, sizeWindow.cx, sizeWindow.cy);
+		::SelectObject(hdcMemory, hBitMap);
 
-			::SelectObject(hdcMemory, hBitMap);
+		RECT rcWindow;
+		GetWindowRect(m_hWnd,&rcWindow);
 
-			RECT rcWindow;
-			GetWindowRect(m_hWnd,&rcWindow);
+		BITMAPINFOHEADER stBmpInfoHeader = { 0 };   
+		int nBytesPerLine = ((sizeWindow.cx * 32 + 31) & (~31)) >> 3;
+		stBmpInfoHeader.biSize = sizeof(BITMAPINFOHEADER);   
+		stBmpInfoHeader.biWidth = sizeWindow.cx;   
+		stBmpInfoHeader.biHeight = sizeWindow.cy;   
+		stBmpInfoHeader.biPlanes = 1;   
+		stBmpInfoHeader.biBitCount = 32;   
+		stBmpInfoHeader.biCompression = BI_RGB;   
+		stBmpInfoHeader.biClrUsed = 0;   
+		stBmpInfoHeader.biSizeImage = nBytesPerLine * sizeWindow.cy;   
 
-			BITMAPINFOHEADER stBmpInfoHeader = { 0 };   
-			int nBytesPerLine = ((sizeWindow.cx * 32 + 31) & (~31)) >> 3;
-			stBmpInfoHeader.biSize = sizeof(BITMAPINFOHEADER);   
-			stBmpInfoHeader.biWidth = sizeWindow.cx;   
-			stBmpInfoHeader.biHeight = sizeWindow.cy;   
-			stBmpInfoHeader.biPlanes = 1;   
-			stBmpInfoHeader.biBitCount = 32;   
-			stBmpInfoHeader.biCompression = BI_RGB;   
-			stBmpInfoHeader.biClrUsed = 0;   
-			stBmpInfoHeader.biSizeImage = nBytesPerLine * sizeWindow.cy;   
+		PVOID pvBits = NULL;   
 
-			PVOID pvBits = NULL;   
+		HBITMAP hbmpMem = ::CreateDIBSection(NULL, (PBITMAPINFO)&stBmpInfoHeader, DIB_RGB_COLORS, &pvBits, NULL, 0);
 
-			HBITMAP hbmpMem = ::CreateDIBSection(NULL, (PBITMAPINFO)&stBmpInfoHeader, DIB_RGB_COLORS, &pvBits, NULL, 0);
+		assert(hbmpMem != NULL);
 
-			assert(hbmpMem != NULL);
+		memset( pvBits, 0, sizeWindow.cx * 4 * sizeWindow.cy);
 
-			memset( pvBits, 0, sizeWindow.cx * 4 * sizeWindow.cy);
-
-			if(hbmpMem)   
-			{   
-				HGDIOBJ hbmpOld = ::SelectObject( hdcMemory, hbmpMem);
+		if(hbmpMem)   
+		{   
+			HGDIOBJ hbmpOld = ::SelectObject( hdcMemory, hbmpMem);
 				
-				POINT ptWinPos = { rcWindow.left, rcWindow.top };
+			POINT ptWinPos = { rcWindow.left, rcWindow.top };
 
-				Gdiplus::Graphics graph(hdcMemory);
+			Gdiplus::Graphics graph(hdcMemory);
 
-				graph.SetSmoothingMode(Gdiplus::SmoothingModeNone);
+			graph.SetSmoothingMode(Gdiplus::SmoothingModeNone);
 
-				graph.DrawImage(pImage, 0, 0, sizeWindow.cx, sizeWindow.cy);
+			graph.DrawImage(pImage, 0, 0, sizeWindow.cx, sizeWindow.cy);
 
-				HMODULE hFuncInst = LoadLibrary(_T("User32.DLL"));
+			HMODULE hFuncInst = LoadLibrary(_T("User32.DLL"));
 
-				typedef BOOL (WINAPI *MYFUNC)(HWND, HDC, POINT*, SIZE*, HDC, POINT*, COLORREF, BLENDFUNCTION*, DWORD);          
+			typedef BOOL (WINAPI *MYFUNC)(HWND, HDC, POINT*, SIZE*, HDC, POINT*, COLORREF, BLENDFUNCTION*, DWORD);          
 
-				MYFUNC UpdateLayeredWindow;
+			MYFUNC UpdateLayeredWindow;
 
-				UpdateLayeredWindow = (MYFUNC)::GetProcAddress(hFuncInst, "UpdateLayeredWindow");
+			UpdateLayeredWindow = (MYFUNC)::GetProcAddress(hFuncInst, "UpdateLayeredWindow");
 
-				POINT ptSrc = { 0, 0};
+			POINT ptSrc = { 0, 0};
 
-				//不会发送 WM_SIZE和WM_MOVE消息
-				if(!UpdateLayeredWindow(m_hWnd, hDC, &ptWinPos, &sizeWindow, hdcMemory, &ptSrc, 0, &blendFunc, ULW_ALPHA))
-				{
-					TCHAR tmp[255] = {_T('\0')};
+			//不会发送 WM_SIZE和WM_MOVE消息
+			if(!UpdateLayeredWindow(m_hWnd, hDC, &ptWinPos, &sizeWindow, hdcMemory, &ptSrc, 0, &blendFunc, ULW_ALPHA))
+			{
+				TCHAR tmp[255] = {_T('\0')};
 #ifdef UNICODE
-	#define	MySprintf swprintf_s
+#define	MySprintf swprintf_s
 #else
-	#define MySprintf sprintf_s
+#define MySprintf sprintf_s
 #endif
-					MySprintf(tmp,255,__T("UpdateLayeredWindow 调用失败,错误代码:%u"),GetLastError());
+				MySprintf(tmp,255,__T("UpdateLayeredWindow 调用失败,错误代码:%u"),GetLastError());
 
-					MessageBox(m_hWnd,tmp,_T("提示"),MB_OK);
-				}
-
-				//::SendMessage(m_hWnd,WM_SIZE,0,MAKELONG(sizeWindow.cy,sizeWindow.cx));
-
-				//::SendMessage(m_hWnd,WM_MOVE,0,MAKELONG(ptSrc.y,ptSrc.x));
-
-				graph.ReleaseHDC(hdcMemory);
-
-				::SelectObject( hdcMemory, hbmpOld);   
-
-				::DeleteObject(hbmpMem); 
+				MessageBox(m_hWnd,tmp,_T("提示"),MB_OK);
 			}
 
-			::DeleteDC(hdcMemory);
+			//::SendMessage(m_hWnd,WM_SIZE,0,MAKELONG(sizeWindow.cy,sizeWindow.cx));
 
-			::DeleteDC(hDC);
+			//::SendMessage(m_hWnd,WM_MOVE,0,MAKELONG(ptSrc.y,ptSrc.x));
+
+			graph.ReleaseHDC(hdcMemory);
+
+			::SelectObject( hdcMemory, hbmpOld);   
+
+			::DeleteObject(hbmpMem); 
 		}
-		else
-		{
-			assert(false && _T("背景图片打开失败!"));
-		}
+
+		::DeleteDC(hdcMemory);
+
+		::DeleteDC(hDC);
+	}
+	else
+	{
+		assert(false && _T("背景图片打开失败!"));
 	}
 }
 

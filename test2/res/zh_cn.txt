@@ -1,0 +1,471 @@
+langeagestart=启动
+game_set=游戏设置
+about_beagle=关于我们
+func_lib=功能
+news=新闻
+powerful=历史
+cursor=指针设置
+recory=重置
+apply_to_game=应用到游戏
+
+cursortips_1=更改鼠标显示图标
+function_quick_switch=Trocar fun??o
+chatmsg=自动喊话
+quickkey=快捷键
+
+num=数字键
+
+chat_msg=快捷喊话
+msg_0=敌人不见了！注意的Gank！
+
+msg_1=上路Miss，小心Gank！
+
+msg_2=中路Miss，小心Gank！
+
+msg_3=下路Miss，小心Gank！
+
+msg_4=撤退！
+
+msgtip_1=<p 3>你可以给队友快速发送一条快捷信息，<n>按“T”键打开[快速信息]，选择一个事先设置的喊话内容t!</p>
+healthbar=Hitpoint bar
+healthbartip_1=Change hitpoint bar style can easily separate yourself with other players in the combat
+gamefont=Game Fonts
+summoner=Summoner
+name_size=Font size
+font_color=Font colour
+border_color=Frame colour
+damage_font=Damage font
+damage=Physical damage
+critic_damage=Critical damage
+spell_damage=Spell damage
+true_damage=True damage
+font_tips=Pick a colour for your own font to express your own style!
+screenshot=截图
+gamescreenprint=游戏中截图
+
+airresultscreen=胜利自动截图
+picture_type=图片类型
+scan=选择文件夹
+
+open_folder=打开截图文件夹
+
+screenshottips=打开“胜利自动截图”，记录每次取胜的比赛！
+use=启用
+show=Show
+jungle_timer=打野计时
+use_jungle_timer=启用野怪计时
+
+show_the_timer_bar=显示复活时间工具条
+
+use_team_notice=剩余20秒通知队友
+use_Map_Wornning_point=在屏幕中提示
+show_the_minimap_time_number=显示小地图计时器
+timer_tips=<p 6>记不住怪物的重生时间吗？<n>启用“野怪计时”，可以计录野怪重生时间！</p>
+crystal_timer=Cronometrar inibidor
+crystaltimer_tips=Permita contagem regressiva do inibidor, você vai conhecer seus inimigos melhor e 
+vencê-los mais facilmente
+redefineitem=Redefine item
+all_hero=All hero
+modified_hero=Modified hero
+all=所有
+
+assassin=刺客
+mage=法师
+ranged=Range
+melee=Melee
+stealth=Stealth
+tank=坦克
+pusher=Pusher
+carry=Carry
+fighter=战士
+jungler=打野
+support=辅助
+marksman=射手
+changeskin=皮肤更改
+recovery=重置还原皮肤
+error_report=Error report
+clear_all_skin=重置所有皮肤
+
+apply=应用
+exit=退出
+
+all=All
+movement=Movement Speed
+boots=Boots
+mana_regen=Mana Regeneration
+health_regen=Health Regeneration 
+health=Hitpoints
+critical_strike=Critical Chance
+spell_damage=Magic Damage
+armor=Armor
+spell_block=Magic Resist
+damage=Damage
+on_hit=Passive Ability
+attack_speed=Attack Speed
+life_steal=Life Steal
+consumable=Consumables
+cooldown_reduction=Cooldown Reduction
+active=Active Ability
+stealth=furtividade
+aura=Aura
+magic_penetration=Magic Penetration
+slow=Slow
+nonboots_movement=Other movement items
+armor_penetration=Armor Penetration
+gold_per=Passive gold gain items
+tenacity=Tenacity
+spell_vamp=Spell Vamp
+defence_all=Defense
+attack_all=Attack
+spell_all=Magic
+movement=Movement
+starting_items=Starting Items
+mian_items=Essential Items
+attack_items=Offensive Items
+defance_items=Defensive Items
+sconsumable_items=Consumables
+all_price=Total cost
+single_price=Item cost
+function_library=Function Library
+champion_free_weekly=<f 1>Campe?es de gra?a esta semana</f>
+champion_modified=<f 1>A Skin foi modificada </f>
+game_location=Game Path
+path_excmple=Game Path Example:
+ok=确定
+cancel=取消
+reset=重置
+game_default=Game default
+green_border=Green border
+light_green_border=Light green border
+yellow_border=Yellow border
+pink_border=Pink border
+screenshotfilepath=截图保存路径
+defaule_sln=Default setting
+my_sln=Custom setting
+recommended=Recommendation
+dufault_skin=Classic skin
+check_update=Check update
+apply_aucceed=Apply successful
+recovery_to_default=重置
+applied_to_successed=Plan applied succesful
+resetsuccess=设置成功
+recitem=
+save=Save
+free_hero=Free champion rotation
+time_bar=Time bar
+file_downloading=Downloading file
+download_file=Download file
+yes=Yes
+finish=Finish
+no=No
+new_version_on_mk_server=检测到新版本，更新吗？<n>更新完后请关闭程序用MK汉化器重新运行。
+
+retry=Retry
+close=Close
+compare_file=Analysing folder
+shut_down_lol_to_continue=Do you want to exit League of Legends and continue update?
+analyse_file_list=Analysing file list
+no_update_visable=No update available
+download_file_error=Error occured when downloading files
+replace_file=Replaceing file
+update_complele=Update completed
+auto_shot_succeed=Auto Screenshot succeed
+auto_shot_failed=Auto Screenshot failed
+file_path=游戏截图保存在
+
+check_update_processing=检查更新
+
+current_version_is_newest=该程序是最新版本
+
+current_hero_skin_reset=当前英雄皮肤已经被重置
+
+skin_set_succeed=英雄皮肤设置成功
+all_hero_skin_reset=所有的英雄的皮肤都被重置，
+launcher_check_update=检查更新
+
+get_server_info=访问服务器的信息
+eye_timer=守卫计时器
+
+eye_timer_tips=Monitoramento da Sentinela
+eye_timer_statics=Registrar tempo restante de Sentinela, de Sentinela detectora, inserir vis?o para seus parceiros e avisar a equipe
+client_ver=程序版本
+new_version_visable=检测到新版本。
+
+bug_report=提交错误报告
+functionguide=功能介绍
+default_value=重设
+click_to_View=点击查看详细信息
+i_wanna_recommed_items=Change item set
+applysuccess=申请成功
+mk_home_page=MK 官网
+about_mk=关于我们
+league_of_legends=英雄联盟
+connect_server_error=无法连接服务器
+
+upload_result_function_on=Result uploading on
+upload_result_function_off=Result uploading off
+add_champion=添加英雄
+eye_timer_quickkey_info=<c #0608b7>按M键来检查守位的位置和持续时间 </c>
+chat_msg_quickkey_info=<c #0608b7>按T键+数字键或用鼠标点击发送消息</c>
+crystal_timer_quickkey_info=<c #0608b7>按M键查看重生时间</c>
+timerbar_quickkey_info=<c #0608b7>小地图不能显示野怪计时</c>
+please_select_report_type=<c #9c0000>*</c>请选择报告的类别
+
+suggest=意见和建议
+
+report_bug=报告bug
+game_crash=程序崩溃
+error=纠错
+
+please_write_bug_process=<c #9c0000>*</c>*请您简单介绍一下发现的问题 
+thanks_tips=感谢您提交的报告！为了使我们的产品更好，我们希望您能留下您的联系方式，以便进一步联络。谢谢！
+msn=Skype
+other=其他
+send=提交
+important_blank_fill=<c #9c0000>*</c>必须填写
+report_msg_should_not_be_empty=*不能为空
+thanks_for_reporting=感谢您的反馈！
+
+Garena=Garena
+you_need_local_game_dir_first=您需要指定英雄联盟的安装目录
+garena_not_found,please_start_Handle_once=Garena not found, please manually find the path
+you_selected_an_invalide_file_path_please_select_lol_launcher_exe=<p 6>你选择了一个无效的路径<n>请选择传奇发射联盟登陆程序</p>
+mk_need_restart=MK需要重新启动
+
+mk_bbs=官网论坛
+user_name=用户名
+
+password=密码
+password_confirm=重复密码
+registe=注册
+GetBackPSD=忘记密码?
+auto_login=自动登陆
+save_my_info=记住用户
+Login=登录
+Username_cannot_be_empty=用户名不能为空
+
+PassWord_cannot_be_empty=密码不能为空
+username_tip_len=用户名必须为3-20个字符
+
+username_tip_char=用户名必须以数字或字母组成
+
+username_tip_unique=用户名不能重复
+
+email_tip_legal=请使用正确的E-mail地址
+email_tip_unique=E-mail地址不能重复
+psd_tip_len=密码必须为6-30个字符之间
+
+psd_tip_char=密码必须由数字或字母组成
+regist_protocol=我已经阅读并同意使用MK <a><c #0000aa> 用户注册协议 </c></a>
+Logout=Log out
+goto_login=返回登陆
+goto_regist=创建用户
+regist=注册
+error_in_name_or_password=无效的用户名或密码
+
+check_user_info=检查用户信息
+
+auto_login_success=自动登录成功
+auto_login_Faild=自动登录失败
+regist_faild=注册失败
+i_want_regist=注册用户
+i_want_get_my_psd=找回密码
+Login_tip=汉化：白小痴
+options=设置
+normal=一般设置
+
+language=Language
+auto_run=系统启动自动运行
+set_path=请选择游戏路径[lol.launcher.exe]
+click_change_skin=点击改变英雄皮肤
+pelase_select_a_hero_first=请先选择一个英雄
+
+server_error=无法连接服务器
+
+server_error_reg_web=无法注册，请 <a><c #0000aa>在这里注册</c></a>
+error_in_name_or_psd_and_get_back_psd=无效的用户名或密码</a>重设密码</c>
+can_not_find_game_state_exe_please_handle=无法找到游戏的路径，请手动设置
+
+bonding_info=绑定信息
+user_info=用户信息
+unbonding_success=未绑定成功
+
+unbonding_faild=未绑定失败
+
+relogin_game_to_bond=请重新登录进入游戏绑定的用户信息
+bonding_success=绑定成功的
+
+bonding_Faild=绑定失败
+bonding_by_other=<p 5>其他用户绑定，<n> 请与我们联系</p> 
+see_bonding_details=查看详细绑定
+removed_from_List=已从列表中删除
+
+bonding_by_other=<p 5>其他用户绑定，<n>请与我们联系</p>
+vectory_in_Total=胜利
+see_history_details=查看结果
+history_add=收集匹配的结果
+
+collect=收集
+BondingList_is_full=<p 5>绑定列表已满， <n>请先解除一个绑定</p>
+mk_chat=ShareFrame
+select_default_skin_before_this=Please select the classic skin first before change champion skin
+user_center=用户中心
+you_select_a_wrong_path=你选择了一个错误的路径
+select_fav_success=主角设置成功
+select_fav_faild=设定主角失败
+notice_tip=<p 4><c #ffffff>Dica: Clique aqui para iniciar rapidamente o League of Leagends</c></p>
+set_as_fav=设置为主角
+
+mk_need_restart=MK需要重新启动
+
+select_language=请选择语言
+clean_file=清除文件
+recheck=重新检查
+
+collected_file=完整的文件检查
+
+nofile_to_be_dill=没有文件需要处理
+
+file_to_be_dill=文件需要处理
+
+see_details=点击查看详细信息
+collectting_old_file=不兼容的旧录像文件
+
+no_old_file_detected=未检测到不兼容的旧录像
+
+collectting_small_file=Small imcompleted replay
+no_small_file_detected=No small imcompleted replay detected
+delete_file_complete=文件删除已完成
+
+auto_clean自动清除
+dill_items=批量处理
+delect_items=删除文件
+select_all=选择所有
+
+cannot_delete_current_file=当前前的文件不能删除
+lol_rePlay_stand_by=录像已开启
+
+lol_rePlay_is_recording=重播录像
+lol_rePlay_faild=录像初始化失败
+
+lol_rePlay_shut_down=录像已关闭
+
+lol_rePlay_disabled=录像无效
+replay=录像
+Vectory=胜利
+Match_Game=正常
+rank_3v3=Rank 3v3
+rank_5v5=Rank 5v5
+rank_1v1=Rank 1v1
+Summoner_Rift=召唤的峡谷
+
+The_Crystal_Scar=水晶之痕
+The_Twisted_Treeline=扭区丛林
+Howling_Abyss=嚎哭深渊
+custom_game=自定义
+
+other=其它
+defeat=失败
+My_Replay=我的录像
+replay_file_path=录像保存在
+
+Replay_quickKey_Info=录像信息
+Open_replay_Folder=打开录像文件夹
+
+Replay_Tips=录像技巧
+
+please_select_game_path=请选择游戏路径
+unLimit_replay_mouse=解锁录像鼠标限制
+guest_login_Info=我们的帐户服务器目前正在进行数据迁移，<n>在此期间，请使用来宾帐户。<n>谢谢您的合作和理解。<n>很抱歉给您带来不便。
+
+guest_login=来宾登陆
+collecting_file=文件正在收集...
+Do_you_want_to_del_replay_file=你要删除这个录像？
+
+replay_is_completing=OB正在转换...不要退出MK。
+
+lol_is_been_record_stop_will_giveup_the_file=录像中，点击"停止“将终止当前的录像，停止后将无法重新启动或继续录像。
+
+old_file_cannot_play=旧的版本，不能播放。
+
+Do_want_to_bonding=你要绑定这个MK帐户？
+
+ward_skin=守卫皮肤
+SHOWFUNCTIONSTATUS=辅助功能已经启动！
+
+STR_MT_TIMERBAR_TIP=时间栏
+
+STR_MT_STARTTIME_OK=定时器启动
+
+STR_MT_STARTTIME_FAILED=定时器启动失败
+
+SENDALL_MT_FORMAT_R=%s 需要 %s 重生 
+SENDALL_MT_FORMAT_ERR=没有怪物计数重生
+STR_MONSTER_INFO_BT_BLUE=蓝队蓝BUFF
+STR_MONSTER_INFO_BT_RED=蓝队红BUFF
+STR_MONSTER_INFO_DRAGON=小龙
+STR_MONSTER_INFO_BARON=男爵
+STR_MONSTER_INFO_PT_RED=紫队红BUFF
+STR_MONSTER_INFO_PT_BLUE=紫队蓝BUFF
+STR_MT_RESPAWN= 已重生
+
+STR_MT_RESPAWN_20=20秒重生
+
+STR_SCREEN_SHOT_CUCCESS=成功截图
+STR_QM_TIP=快速消息
+
+STR_QM_SEND_LIMIT_TIP=请等待一段时间才能发送下一条消息
+
+langeage=endend
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

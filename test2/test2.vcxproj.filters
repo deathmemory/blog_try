@@ -63,5 +63,8 @@
     <None Include="res\LauncherTransit.dat">
       <Filter>Resource Files\res</Filter>
     </None>
+    <None Include="res\zh_cn.txt">
+      <Filter>Resource Files\res</Filter>
+    </None>
   </ItemGroup>
 </Project>

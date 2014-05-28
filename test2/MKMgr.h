@@ -10,6 +10,7 @@ public:
 	void thanksList();
 	void aboutMe();
 protected:
+	BOOL patchLanguage();
 	BOOL patchLauncher();
 };
 

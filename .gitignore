@@ -45,6 +45,7 @@ local.properties
 # Build results
 
 [Uu]nicodeDebug/
+[Uu]nicodeRelease/
 [Dd]ebug/
 [Rr]elease/
 x64/

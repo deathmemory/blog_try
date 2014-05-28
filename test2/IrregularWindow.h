@@ -26,7 +26,7 @@ class CIrregularWindow
 {
 public:
 
-	CIrregularWindow(const TCHAR* pBackImgFullPath,DWORD dwAttachWndTransColor = c_dwTransColor);
+	CIrregularWindow(const TCHAR* pBackImgFullPath, TCHAR* sourceType = NULL, DWORD dwAttachWndTransColor = c_dwTransColor);
 
 	//附加窗体
 	bool AttachWindow(HWND hWnd);
@@ -43,6 +43,7 @@ public:
 	void CenterWindow();
 
 protected:
+	Image* GetImage();
 
 	virtual bool RegisterWindowClass();
 
@@ -73,6 +74,10 @@ protected:
 
 	DWORD m_dwAttachWndTransColor;
 
+	//资源类型，如果指定了资源类型则表示从资源中获取图片
+	TCHAR* m_sourceType;
+
+	DWORD m_dwResID;
 	//背景图片(png)
 	__String m_strBackImg;
 };

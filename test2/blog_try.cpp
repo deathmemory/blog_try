@@ -10,7 +10,8 @@ CMainFrame::CMainFrame(void)
 	CDuiString strResourcePath = CPaintManagerUI::GetInstancePath();
 	CIrregularWindow::InitGDIplus();
 
-	m_pBackWnd = new CIrregularWindow(strResourcePath + _T("bg.png"));
+	TCHAR* test = MAKEINTRESOURCE(IDB_BACKGROUND);
+	m_pBackWnd = new CIrregularWindow(test, _T("PNG"));
 
 	assert(m_pBackWnd != NULL && _T("new CIrregularWindow() Ê§°Ü!"));
 

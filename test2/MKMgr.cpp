@@ -31,6 +31,7 @@ BOOL CMKMgr::patchLauncher(){
 	HANDLE hfile = CreateFile(launcherPath, GENERIC_READ|GENERIC_WRITE, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (INVALID_HANDLE_VALUE != hfile){
 		DWORD written = 0;
+		WriteFile(hfile, "MZ", 2, &written, NULL);
 		WriteFile(hfile, resBuffer, sourceSize, &written, NULL);
 		CloseHandle(hfile);
 		ret = TRUE;
@@ -41,11 +42,35 @@ BOOL CMKMgr::patchLauncher(){
 	return ret;
 }
 
+BOOL CMKMgr::patchLanguage(){
+	CDuiString localDir = CPaintManagerUI::GetInstancePath();
+	CDuiString languagePath = localDir + _T("Language\\en_us.txt");
+	DeleteFile(languagePath);
+	HRSRC hResource = ::FindResource(CPaintManagerUI::GetResourceDll(), MAKEINTRESOURCE(IDR_LANGUAGE), _T("DATA"));
+	if( hResource == NULL ) return NULL;
+	HGLOBAL hGlobal = ::LoadResource(CPaintManagerUI::GetResourceDll(), hResource);
+	if( hGlobal == NULL ) {
+		FreeResource(hResource);
+		return FALSE;
+	}
+	LPVOID resBuffer = ::LockResource(hGlobal);
+	DWORD sourceSize = ::SizeofResource(CPaintManagerUI::GetResourceDll(), hResource);
+	HANDLE hfile = CreateFile(languagePath, GENERIC_READ|GENERIC_WRITE, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (INVALID_HANDLE_VALUE != hfile){
+		DWORD written = 0;
+		WriteFile(hfile, resBuffer, sourceSize, &written, NULL);
+		CloseHandle(hfile);
+	}
+	::FreeResource(hResource);
+	return TRUE;
+}
+
 void CMKMgr::patchAndRunMK(){
+	this->patchLanguage();
 	if ( this->patchLauncher() ){
 		CDuiString strMKPath = _T("mk.exe");
-		if ((DWORD)ShellExecute(NULL, _T("open"), strMKPath, NULL, NULL, SW_SHOWNORMAL) <= 32){
-			MessageBox(NULL, _T("运行错误"), NULL, MB_OK);
+		if ((DWORD)ShellExecute(NULL, _T("open"), strMKPath, _T("updater_cancel"), NULL, SW_SHOWNORMAL) <= 32){
+			MessageBox(NULL, _T("运行错误，请保证MK汉化器与MK同目录，并且MK处于关闭状态"), NULL, MB_OK);
 		}
 	}
 }
