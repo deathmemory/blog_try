@@ -46,6 +46,8 @@ void CMainFrame::Notify(TNotifyUI& msg)//处理窗口通知消息，响应用户的输入
 			m_MKMgr.thanksList();
 		}else if (name == _T("aboutme")){
 			m_MKMgr.aboutMe();
+		}else if (name == _T("faq")){
+			m_MKMgr.faq();
 		}
 	}else if (msg.sType == _T("click")){
 		if (name == _T("close")){
@@ -119,11 +121,12 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	CMainFrame* pMainFrame = new CMainFrame();//创建应用程序窗口类对象
 	if( pMainFrame == NULL ) 
 		return 0;
+	pMainFrame->SetIcon(IDI_ICON1);
 	//以背景的句柄为父窗口创建DLG，如果不这样的话，在任务栏会产生两个窗体，不信，你就把下面create的第一个参数改成NULL试试，你就懂了
 	pMainFrame->Create(pMainFrame->m_pBackWnd->GetHandle(), _T("AdderCalc"), UI_WNDSTYLE_DIALOG, 0);
 	//让背景图片居中
 	pMainFrame->m_pBackWnd->CenterWindow();
-
+	
 	pMainFrame->ShowWindow(true);//显示窗口
 	CPaintManagerUI::MessageLoop();//进入消息循环
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "resource.h"
 #include "MKMgr.h"
+#include "../publicdef/dmcode.hpp"
 #include <Shellapi.h>
 
 CMKMgr::CMKMgr(void)
@@ -68,8 +69,43 @@ BOOL CMKMgr::patchLanguage(){
 void CMKMgr::patchAndRunMK(){
 	this->patchLanguage();
 	if ( this->patchLauncher() ){
-		CDuiString strMKPath = _T("mk.exe");
-		if ((DWORD)ShellExecute(NULL, _T("open"), strMKPath, _T("updater_cancel"), NULL, SW_SHOWNORMAL) <= 32){
+		CDuiString curDir = CPaintManagerUI::GetInstancePath();
+		CDuiString strMKCMD = curDir + _T("mk.exe updater_cancel");
+		STARTUPINFO si = {sizeof(STARTUPINFO)};
+		PROCESS_INFORMATION pi = {NULL};
+		if ( CreateProcess(NULL, (LPTSTR)strMKCMD.GetData(), NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi) ){
+			/*
+			0123A2C5     /0F85 DA090000          jnz     0123ACA5                         ;  直接改成请求失败
+			0123A2CB  |. |8D4C24 64              lea     ecx, dword ptr [esp+64]
+			0123A2CF  |. |51                     push    ecx
+			0123A2D0  |. |E8 7B650100            call    01250850
+			0123A2D5  |. |6A 01                  push    1
+			0123A2D7  |. |6A 00                  push    0
+			0123A2D9  |. |56                     push    esi
+			0123A2DA  |. |8D4C24 70              lea     ecx, dword ptr [esp+70]
+			0123A2DE  |. |C68424 C4000000 02     mov     byte ptr [esp+C4], 2
+			0123A2E6  |. |E8 85790100            call    01251C70
+			0123A2EB  |. |56                     push    esi
+			0123A2EC  |. |E8 2BA40400            call    0128471C
+
+			0F?????????? 8D?????? 51 E8???????? 6A?? 6A?? 56 8D?????? C6?????????????? E8	v40
+			*/
+			std::vector<PAGEINFO> pageInfoVct;
+			HANDLE hProc = pi.hProcess;
+			DWORD addr = (DWORD) dmcode::procDimFindCode(hProc/*6252*/, PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY, 
+				"0F?????????? 8D?????? 51 E8???????? 6A?? 6A?? 56 8D?????? C6?????????????? E8", pageInfoVct);
+			if (addr){
+				if ( WriteProcessMemory(hProc, (LPVOID)(addr + 1), "\x85", 1, NULL) ){
+					// successed
+				}else{
+					MessageBox(NULL, _T("patch 失败了，请反馈给作者"), NULL, MB_OK);
+				}
+			}
+			ResumeThread(pi.hThread);
+			ResumeThread(hProc);
+			CloseHandle(pi.hThread);
+			CloseHandle(hProc);
+		}else{
 			MessageBox(NULL, _T("运行错误，请保证MK汉化器与MK同目录，并且MK处于关闭状态"), NULL, MB_OK);
 		}
 	}
@@ -99,4 +135,8 @@ void CMKMgr::thanksList(){
 void CMKMgr::aboutMe(){
 	CDuiString myWeibo = _T("http://weibo.com/zsmfshi");
 	ShellExecute(NULL, _T("open"), myWeibo, NULL, NULL, SW_SHOWNORMAL);
+}
+void CMKMgr::faq(){
+	CDuiString myFAQ = _T("http://nga.178.com/read.php?tid=7065154&page=e&topid=131979461#pid131979461Anchor");
+	ShellExecute(NULL, _T("open"), myFAQ, NULL, NULL, SW_SHOWNORMAL);
 }

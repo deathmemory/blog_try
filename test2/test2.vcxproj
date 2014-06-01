@@ -159,6 +159,7 @@
   <ItemGroup>
     <None Include="res\bg.png" />
     <None Include="res\LauncherTransit.dat" />
+    <None Include="res\mf.ico" />
     <None Include="res\UISkin.xml">
       <SubType>Designer</SubType>
     </None>

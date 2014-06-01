@@ -9,6 +9,7 @@ public:
 	void doUpdate();
 	void thanksList();
 	void aboutMe();
+	void faq();
 protected:
 	BOOL patchLanguage();
 	BOOL patchLauncher();
