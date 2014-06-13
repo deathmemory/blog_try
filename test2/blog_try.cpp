@@ -14,6 +14,11 @@ CMainFrame::CMainFrame(void)
 	m_pBackWnd = new CIrregularWindow(test, _T("PNG"));
 
 	assert(m_pBackWnd != NULL && _T("new CIrregularWindow() 失败!"));
+
+	if(m_pBackWnd)
+	{
+		HWND hBkWnd = m_pBackWnd->GetHandle();
+	}
 }
 
 CMainFrame::~CMainFrame(void)
@@ -44,12 +49,9 @@ void CMainFrame::Notify(TNotifyUI& msg)//处理窗口通知消息，响应用户的输入
 		}else if (name == _T("faq")){
 			m_MKMgr.faq();
 		}
-	}else if ( msg.sType == _T("click") ){
-		if ( name == _T("close") ){
-			SendMessage( WM_DESTROY );
-		}else if ( name == _T("minwnd") ){
-			this->ShowWindow( SW_MINIMIZE );
-			::ShowWindow(m_pBackWnd->GetHandle(), SW_MINIMIZE);
+	}else if (msg.sType == _T("click")){
+		if (name == _T("close")){
+			SendMessage(WM_DESTROY);
 		}
 	}
 }
@@ -71,18 +73,15 @@ LRESULT CMainFrame::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHan
 	m_pm.AttachDialog(pRoot);//附加控件数据到HASH表中……为pRoot作为对话框结点，为其创建控件树	
 	m_pm.AddNotifier(this);//增加通知处理
 
- 	LONG styleValue = ::GetWindowLong(*this, GWL_STYLE);
- 	styleValue &= ~WS_CAPTION;
- 	styleValue &= ~WS_THICKFRAME; 
- 	::SetWindowLong(*this, GWL_STYLE, styleValue | WS_CLIPSIBLINGS | WS_CLIPCHILDREN);
+	LONG styleValue = ::GetWindowLong(*this, GWL_STYLE);
+	styleValue &= ~WS_CAPTION;
+	styleValue &= ~WS_THICKFRAME; 
+	::SetWindowLong(*this, GWL_STYLE, styleValue | WS_CLIPSIBLINGS | WS_CLIPCHILDREN);
 	
-	if(m_pBackWnd){
+	if(m_pBackWnd)
+	{
 		m_pBackWnd->AttachWindow(m_hWnd);//必须要让背景与当前要作为背景的窗口绑定起来
-		DWORD oldLong = ::GetWindowLong(m_pBackWnd->GetHandle(), GWL_STYLE);
-		::SetWindowLong(m_pBackWnd->GetHandle(), GWL_STYLE, oldLong | WS_MINIMIZEBOX);
-	}
-
-	m_gaThread.Resume();	//开始统计线程
+	};
 	return 0;
 }
 LRESULT CMainFrame::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -94,11 +93,10 @@ LRESULT CMainFrame::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		lRes = OnCreate(uMsg, wParam, lParam, bHandled); 
 		break;
 	case WM_DESTROY:
-		m_gaThread.CancelThread();
+		::PostQuitMessage(0L);
 		CIrregularWindow::UnInitGDIplus();
 		delete m_pBackWnd;
 		m_pBackWnd = NULL;
-		::PostQuitMessage(0L);
 		return 0;
 	default:
 	bHandled = FALSE;
