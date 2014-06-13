@@ -3,6 +3,7 @@
 //#include "resource.h"
 #include "MKMgr.h"
 #include "IrregularWindow.h"
+#include "GAThread.h"
 
 class CMainFrame :
 	public DuiLib::CWindowWnd,public INotifyUI//应用程序窗口类CWindowWnd
@@ -19,9 +20,10 @@ public:
 	LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 public:
-	CPaintManagerUI m_pm;//与控件绘制和消息处理关联起来
-	CIrregularWindow *m_pBackWnd;
-	CMKMgr	m_MKMgr;
+	CPaintManagerUI		m_pm;//与控件绘制和消息处理关联起来
+	CIrregularWindow	*m_pBackWnd;
+	CMKMgr				m_MKMgr;
+	CGAThread			m_gaThread;	//统计线程
 };
 
 

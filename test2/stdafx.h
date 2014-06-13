@@ -12,9 +12,12 @@
 #include <zmouse.h>
 
 #include "..\DuiLib\UIlib.h"
-
 using namespace DuiLib;
 
+#include "../CPPClient4GMP/GAClient.h"
+#define GOOGLEID_NIGOULE_COM				L"UA-51732277-1"
+#define GOOGLEID_AppID						L"zhaigj"
+extern GAClient gaClient;
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

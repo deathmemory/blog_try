@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="blog_try.h" />
+    <ClInclude Include="GAThread.h" />
     <ClInclude Include="IrregularWindow.h" />
     <ClInclude Include="MKMgr.h" />
     <ClInclude Include="resource.h" />
@@ -149,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="blog_try.cpp" />
+    <ClCompile Include="GAThread.cpp" />
     <ClCompile Include="IrregularWindow.cpp" />
     <ClCompile Include="MKMgr.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -166,6 +168,9 @@
     <None Include="res\zh_cn.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CPPClient4GMP\CPPClient4GMP.vcxproj">
+      <Project>{3afe9dcf-93f6-4e67-8501-b76dfcd367c4}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\DuiLib\DuiLib.vcxproj">
       <Project>{e106acd7-4e53-4aee-942b-d0dd426db34e}</Project>
     </ProjectReference>
