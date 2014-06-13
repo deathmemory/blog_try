@@ -126,7 +126,7 @@ void CMKMgr::doUpdate(){
 }
 void CMKMgr::thanksList(){
 	CDuiString str = _T("感谢：\n");
-	str +=	_T("平   台 -- NGA\n");
+	str +=	_T("平   台 -- NGA & MK盒子贴吧\n");
 	str +=	_T("人气贴 -- 上古战魂魔腾\n");
 	str +=	_T("汉   化 -- 白小痴\n");
 
